@@ -10,6 +10,7 @@ import com.freshchat.consumer.sdk.FaqOptions;
 import com.freshchat.consumer.sdk.Freshchat;
 import com.freshchat.consumer.sdk.FreshchatCallbackStatus;
 import com.freshchat.consumer.sdk.FreshchatConfig;
+import com.freshchat.consumer.sdk.FreshchatImageLoader;
 import com.freshchat.consumer.sdk.FreshchatUser;
 import com.freshchat.consumer.sdk.FreshchatMessage;
 import com.freshchat.consumer.sdk.ConversationOptions;
@@ -63,6 +64,12 @@ public class FlutterFreshchatPlugin implements MethodCallHandler {
             freshchatConfig.setTeamMemberInfoVisible(teamMemberInfoVisible);
 
             Freshchat.getInstance(this.application.getApplicationContext()).init(freshchatConfig);
+
+            final FreshchatImageLoader imageLoader = com.freshchat.consumer.sdk.j.af.aw(this.application.getApplicationContext());
+            if (imageLoader != null) {
+                Freshchat.setImageLoader(imageLoader);
+            }
+
             result.success(true);
             break;
         case METHOD_IDENTIFY_USER:
