@@ -50,6 +50,11 @@ public class FlutterFreshchatPlugin implements MethodCallHandler {
 
         switch (call.method) {
         case METHOD_INIT:
+            final FreshchatImageLoader imageLoader = com.freshchat.consumer.sdk.j.af.aw(this.application.getApplicationContext());
+            if (imageLoader != null) {
+                Freshchat.setImageLoader(imageLoader);
+            }
+
             final String appID = call.argument("appID");
             final String appKey = call.argument("appKey");
             final boolean cameraEnabled = call.argument("cameraEnabled");
@@ -64,12 +69,6 @@ public class FlutterFreshchatPlugin implements MethodCallHandler {
             freshchatConfig.setTeamMemberInfoVisible(teamMemberInfoVisible);
 
             Freshchat.getInstance(this.application.getApplicationContext()).init(freshchatConfig);
-
-            final FreshchatImageLoader imageLoader = com.freshchat.consumer.sdk.j.af.aw(this.application.getApplicationContext());
-            if (imageLoader != null) {
-                Freshchat.setImageLoader(imageLoader);
-            }
-
             result.success(true);
             break;
         case METHOD_IDENTIFY_USER:
