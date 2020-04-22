@@ -38,7 +38,7 @@ public class FlutterFreshchatPlugin implements MethodCallHandler {
 
     public static void registerWith(Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_freshchat");
-        channel.setMethodCallHandler(new FlutterFreshchatPlugin((Application) registrar.getApplication()));
+        channel.setMethodCallHandler(new FlutterFreshchatPlugin((Application) registrar.context().getApplicationContext()));
     }
 
     private FlutterFreshchatPlugin(Application application) {
